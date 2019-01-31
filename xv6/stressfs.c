@@ -7,6 +7,7 @@
 //    for (i = 0; i < 40000; i++)
 //      asm volatile("");
 
+#include <limits.h>
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -43,7 +44,7 @@ main(int argc, char *argv[])
     read(fd, data, sizeof(data));
   close(fd);
 
-  wait();
+  wait(0);
 
-  exit();
+    exit(0);
 }
