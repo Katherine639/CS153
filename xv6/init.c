@@ -1,5 +1,6 @@
 // init: The initial user-level program
 
+#include <limits.h>
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -24,14 +25,14 @@ main(void)
     pid = fork();
     if(pid < 0){
       printf(1, "init: fork failed\n");
-      exit();
+        exit(0);
     }
     if(pid == 0){
       exec("sh", argv);
       printf(1, "init: exec sh failed\n");
-      exit();
+        exit(0);
     }
-    while((wpid=wait()) >= 0 && wpid != pid)
+    while((wpid= wait(0)) >= 0 && wpid != pid)
       printf(1, "zombie!\n");
   }
 }
