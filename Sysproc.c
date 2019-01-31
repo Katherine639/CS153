@@ -1,4 +1,3 @@
-#include <limits.h>
 #include "types.h"
 #include "x86.h"
 #include "defs.h"
@@ -17,34 +16,14 @@ sys_fork(void)
 int
 sys_exit(void)
 {
-  int status;
-  if(argint(0,&status)<0)
-    return -1;
-  exit(status);
+  exit();
   return 0;  // not reached
 }
 
 int
 sys_wait(void)
 {
-  char *status;
-  if(argptr(0,&status, sizeof(int))<0)
-    return -1;
-  return wait((int*)status);
-}
-int
-sys_waitpid(void)
-{
-  int pid;
-  char *status;
-  int options;
-  if(argint(0,&pid)<0)
-    return -1;
-  if(argptr(1,&status, sizeof(int))<0)
-    return -1;
-  if(argint(2,&options)<0)
-    return -1;
-  return waitpid(pid,(int*)status,options);
+  return wait();
 }
 
 int
